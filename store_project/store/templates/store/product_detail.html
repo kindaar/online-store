@@ -1,0 +1,47 @@
+{% extends 'store/index.html' %}
+
+{% block content %}
+<div class="card">
+    {% include 'store/includes/image.html' %}
+    <div class="card-body">
+        <h5 class="card-title">{{ product.title }}</h5>
+        <p class="card-text">{{ product.info }}</p>
+        {% include 'store/includes/price_cat_list.html' %}
+        <p class="card-text"></p>
+        <!-- Button trigger modal -->
+        <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#exampleModal">
+            BUY NOW!
+        </button>
+        </p>
+    </div>
+
+</div>
+
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h1 class="modal-title fs-5" id="exampleModalLabel">{{ product.title }}</h1>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <form method="post" action="/save_order">
+                    {% csrf_token %}
+                    <div class="mb-3">
+                        <label for="user_name" class="form-label">Your name</label>
+                        <input type="text" name="user_name" class="form-control" id="user_name"
+                            aria-describedby="emailHelp" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="exampleInputEmail1" class="form-label">Email address</label>
+                        <input type="email" name="user_email" class="form-control" id="exampleInputEmail1"
+                            aria-describedby="emailHelp" required>
+                        <div id="emailHelp" class="form-text">We'll never share your email with anyone else.</div>
+                    </div>
+                    <input type="hidden" name="product_id" value="{{ product.id }}">
+                    <button type="submit" class="btn btn-primary">Order</button>
+                </form>
+            </div>
+        </div>
+
+        {% endblock content %}
