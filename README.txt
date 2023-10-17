@@ -26,5 +26,5 @@ python manage.py runserver
 python manage.py makemigrations
 python manage.py migrate
 
-# Создание админа  123450!
+#
 python manage.py createsuperuser
